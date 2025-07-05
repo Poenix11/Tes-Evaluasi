@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Skor Evaluasi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #result {
+      text-align: center;
+      font-weight:bold;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Evaluasi Quiz</h2>
+  <form id="quizForm">
+    <div class="question">
+      <p>1. Seberapa sering Anda merasa cemas dalam seminggu terakhir?</p>
+      <input type="radio" name="q1" value="1"> Jarang<br>
+      <input type="radio" name="q1" value="2"> Kadang-kadang<br>
+      <input type="radio" name="q1" value="3"> Sering<br>
+    </div>
+    <div class="question">
+      <p>2. Apakah Anda merasa kelelahan emosional?</p>
+      <input type="radio" name="q2" value="1"> Tidak sama sekali<br>
+      <input type="radio" name="q2" value="2"> Sedikit<br>
+      <input type="radio" name="q2" value="3"> Sangat sering<br>
+    </div>
+    <div class="question">
+      <p>3. Apakah Anda merasa tidak termotivasi akhir-akhir ini?</p>
+      <input type="radio" name="q3" value="1"> Tidak<br>
+      <input type="radio" name="q3" value="2"> Kadang<br>
+      <input type="radio" name="q3" value="3"> Sering<br>
+    </div>
+    <button type="button" onclick="calculateScore()">Kirim Jawaban</button>
+  </form>
+  <div id="result"></div>
+
+  <script>
+    function calculateScore() {
+      let total = 0;
+      for (let i = 1; i <= 3; i++) {
+        const answer = document.querySelector(`input[name=q${i}]:checked`);
+        if (answer) {
+          total += parseInt(answer.value);
+        }
+      }
+      let category = "";
+      if (total <= 3) {
+        category = "Ringan";
+      } else if (total <= 6) {
+        category = "Sedang";
+      } else {
+        category = "Berat";
+      }
+      document.getElementById("result").innerHTML =
+        `Skor Anda: ${total} <br> Kategori: <strong>${category}</strong>`;
+    }
+  </script>
+</body>
+</html>
